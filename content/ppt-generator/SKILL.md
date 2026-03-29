@@ -18,11 +18,19 @@ Includes 8 layout templates covering dark, light, consulting, tech, and more.
 
 After receiving a PPT request, **do not generate immediately**. Guide the user step by step:
 
-### Step 1: Confirm Topic
+### Step 1: Confirm Topic and Duration
 
-> Got it, I'll make this PPT for you. The topic is "{extracted from user message}" — correct?
+> Got it, I'll make this PPT for you.
+> Topic: "{extracted from user message}" — correct?
+> How long is the presentation? This determines page count:
+> - 10 min → 10-12 pages
+> - 20 min → 15-18 pages
+> - 30 min → 22-25 pages
+> - 45 min → 28-35 pages
 
-If the user already provided a detailed outline, skip to Step 2.
+**Duration is required** — do not skip this. Page count directly depends on it.
+
+If the user already provided a detailed outline, skip topic confirmation but still ask duration.
 
 ### Step 2: Pick a Style
 
