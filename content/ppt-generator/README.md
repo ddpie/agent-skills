@@ -1,48 +1,53 @@
 # ppt-generator
 
-AI agent skill for generating presentation slides. Converts structured content into polished PPTX files via SVG intermediate format.
+AI agent skill for generating professional presentation slides.
 
-AI Agent 技能，用于生成演示文稿。通过 SVG 中间格式将结构化内容转换为精美的 PPTX 文件。
+AI Agent 技能，用于生成专业演示文稿。
 
 ## Features / 功能
 
 - 9 color themes / 9 种配色主题
-- 8 layout templates (cover, chapter, content, ending) / 8 套布局模板
-- 30+ chart templates (bar, line, pie, funnel, gantt, SWOT, etc.) / 30+ 图表模板
-- 600+ icons (downloaded on-demand from SVG Repo) / 600+ 图标（按需下载）
-- python-pptx native engine / python-pptx 原生引擎
+- 8 layout templates / 8 套布局模板
+- 30+ chart types / 30+ 图表类型
+- 600+ icons / 600+ 图标
+- Fully editable PPTX output / 输出可编辑的 PPTX 文件
+- Optional multi-round cross review / 可选多轮交叉审查
 
 ## Themes / 主题
 
-| Theme | Style | 风格 |
-|-------|-------|------|
-| dark_tech | Dark tech (default) | 深色科技（默认） |
-| dark_warm | Dark warm tone | 深色暖调 |
-| dark_blue / purple / red / green | Dark color variants | 深色变体 |
-| consultant | White + blue, consulting | 咨询风 |
-| light_corporate | Light corporate | 浅色商务 |
-| cloud_orange | Deep navy + orange | 深蓝+橙色 |
+| Theme | Style |
+|-------|-------|
+| dark_tech | Dark tech (default) |
+| dark_warm | Dark warm tone |
+| dark_blue / purple / red / green | Dark color variants |
+| consultant | White + blue, consulting |
+| light_corporate | Light corporate |
+| cloud_orange | Deep navy + orange |
 
-## Layouts / 布局模板
+## Layouts / 布局
 
-| Layout | Style | 风格 |
-|--------|-------|------|
-| dark_warm | AI / tech | AI/科技 |
-| consultant | Strategy analysis | 战略分析 |
-| cloud_orange | Cloud architecture | 云架构 |
-| ai_ops | AI operations | AI 运维 |
-| exhibit | Data showcase | 数据展示 |
-| smart_red | General business | 通用商务 |
-| pixel_retro | Creative / fun | 创意趣味 |
-| 科技蓝商务 | Formal business | 正式商务 |
+| Layout | Best for |
+|--------|----------|
+| dark_warm | AI / tech presentations |
+| consultant | Strategy & business reports |
+| cloud_orange | Cloud & tech architecture |
+| ai_ops | DevOps / operations |
+| exhibit | Data-heavy showcases |
+| smart_red | General business |
+| pixel_retro | Creative / fun topics |
+| tech_blue | Formal business |
 
-## Setup / 安装
+## Usage / 使用
 
-```bash
-pip install python-pptx Pillow
-python3 ppt-master-assets/scripts/download_icons.py  # optional / 可选，图标支持
-```
+Tell your agent to make a PPT. It will guide you through:
 
-## License / 许可
+1. Confirm topic
+2. Pick a style
+3. Review outline
+4. Generate
+
+让你的 Agent 帮你做 PPT，它会引导你完成主题确认、风格选择、大纲确认和生成。
+
+## License
 
 MIT
