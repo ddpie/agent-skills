@@ -4,9 +4,6 @@ This directory provides **640+ high-quality SVG icons** that can be directly emb
 
 > **Icon Source**: [SVG Repo](https://www.svgrepo.com/) - Free open-source SVG icon library
 >
-> Icons are not bundled in this repo. Run the download script to fetch them:
-> ```bash
-> python3 scripts/download_icons.py
 > ```
 
 - **Full Index**: [FULL_INDEX.md](./FULL_INDEX.md) (browse as needed)

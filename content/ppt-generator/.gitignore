@@ -4,4 +4,3 @@ __pycache__/
 .env
 .DS_Store
 # Icons downloaded from SVG Repo on demand
-ppt-master-assets/templates/icons/*.svg
