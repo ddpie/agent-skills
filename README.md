@@ -2,7 +2,7 @@
 
 Practical AI agent skills for real-world automation.
 
-实用 AI Agent 技能合集，覆盖自动化、文档生成、云运维等场景。
+实用 AI Agent 技能合集。
 
 ## Skills
 
