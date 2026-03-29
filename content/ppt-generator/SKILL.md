@@ -136,16 +136,28 @@ create_pptx_with_native_svg(svgs, Path("/tmp/openclaw/output.pptx"),
                             verbose=True)
 ```
 
-### Phase 4：Review（可选）
+### Phase 4：交叉 Review（可选，需用户确认）
 
-生成初稿后，可执行审查-修复循环。
+生成初稿后，询问用户是否需要多轮审查：
 
-**标准 Review（默认）**：至少 2 轮
-- Round 1（全量）：演讲教练 + 目标听众 + 领域专家 + 内容审核 + 视觉检查
-- Round 2（回归）：视觉 + 内容 + 领域专家
-- 退出条件：🔴=0 且 ⚠️≤3，或 round≥4
+> PPT 初稿已生成。要不要跑一轮交叉 Review？多个 reviewer 并行检查，会更精细但需要几分钟。
 
-**快速模式**：用户说"快速出一版"或"不用 review"时跳过。
+如果用户同意且 agent 支持 subagent，执行审查-修复循环：
+
+1. **Round 1（全量审查）**：并行启动 5 个 reviewer subagent
+   - 🎤 演讲教练 — 叙事弧线、信息流、节奏
+   - 👥 目标听众 — 模拟受众反应、理解难度
+   - 🔬 领域专家 — 事实准确性、技术深度
+   - 📋 内容审核 — 结构规范、错别字、数据一致性
+   - 👁️ 视觉检查 — 排版、对齐、可读性
+
+2. **修复**：汇总所有 reviewer 的问题，按优先级修复（🔴 先于 ⚠️）
+
+3. **Round 2（回归验证）**：3 个 reviewer 回归检查修复结果
+
+4. **退出条件**：🔴=0 且 ⚠️≤3，或 round≥4 强制退出
+
+用户说"不用 review"或"快速出一版"时跳过。
 
 ### Phase 5：交付
 
@@ -185,45 +197,3 @@ create_pptx_with_native_svg(svgs, Path("/tmp/openclaw/output.pptx"),
 - `shared-standards.md` — SVG 技术约束
 
 ---
-
-## 备用引擎（快速生成）
-
-当不需要高视觉质量、只需快速出稿时，可用 template_engine.py：
-
-```python
-from template_engine import generate_ppt
-slides = [{"type": "cover", "title": "标题", ...}, ...]
-generate_ppt(slides, "/tmp/output.pptx", theme="dark_tech")
-```
-
-支持 9 种主题：dark_tech（默认）、dark_blue、dark_purple、dark_red、dark_green、dark_warm、consultant、light_corporate、cloud_orange
-
-支持 8 种布局：cover、section、content、table、two_column、stats、cards、closing
-
----
-
-## 经验教训
-
-### 数据准确性
-1. **所有计算必须可验证** — "差 X 倍"必须用原始数据反算验证
-2. **比较必须同维度** — 不能拿输入价和输出价比较
-3. **对比类 PPT 必须覆盖所有对比对象**
-4. **场景选型中推荐的模型必须在前文出现过**
-5. **事实数据跨页必须一致**
-
-### 内容结构
-6. **章节分隔页必须有过渡句**
-7. **Insight 页精简到 3 条以内**
-8. **结尾页不能只写"谢谢"** — 必须有 CTA 或核心 takeaway
-9. **连续数据表之间需要"呼吸页"**
-10. **标题写洞察结论，不写品类标签**
-
-### 视觉排版
-11. **深色主题用预混合实色**（#2A4040）而非 alpha 透明度
-12. **不用 LibreOffice 验证** — 渲染不可靠，用 PDF→PNG 管线
-13. **SVG→PPTX 管线优先** — 视觉质量远超 python-pptx
-14. **每页必须饱满** — 3 条 bullet 是 content 页下限
-
-### 流程
-15. **多轮 Review 是必须的** — 单轮不够
-16. **只发最终版** — 中间版本不发给用户
