@@ -1,3 +1,8 @@
+---
+name: ppt-generator
+description: SVG-based PPT generator with 9 themes, 8 layouts, 30+ charts, and 600+ icons
+---
+
 # PPT Generator Skill
 
 专业级演示文稿生成引擎。直接生成 SVG 页面 + svg_to_pptx 转换为原生可编辑 PPTX。
