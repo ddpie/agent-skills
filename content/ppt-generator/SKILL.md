@@ -1,5 +1,6 @@
 ---
 name: ppt-generator
+version: "1.0.0"
 description: SVG-based PPT generator with 8 layouts, 9 color themes, 30+ charts, and 640+ icons
 ---
 
@@ -150,7 +151,7 @@ Create SVG files page by page in a temporary directory (agent decides the path).
 1. `viewBox` must be `0 0 1280 720` (16:9)
 2. Strictly follow design_spec.md for colors, fonts, and layout
 3. **Forbidden elements**: foreignObject, clipPath, mask, `<style>`, class, `<symbol>`, textPath, `@font-face`, `<animate>`, `<set>`, `<script>`, event attributes, marker, external CSS, `<iframe>`. Full list: `ppt-master-assets/references/shared-standards.md`
-4. **Color compatibility**: Do NOT use `rgba()` or `opacity` on `<g>`/`<image>`. Use pre-mixed solid hex colors instead (e.g., `#2A4040` not `rgba(0,80,80,0.5)`). This ensures PPT compatibility.
+4. **Color compatibility**: Do NOT use `rgba()` or `opacity` attribute on `<g>`/`<image>`. Use `fill-opacity`/`stroke-opacity` on individual elements instead. Example: ❌ `fill="rgba(0,80,80,0.5)"` → ✅ `fill="#005050" fill-opacity="0.5"`
 5. File naming: `01_cover.svg`, `02_toc.svg`, `03_chapter1.svg`... in order
 6. All text uses `<text>` elements with `font-family`, `font-size`, `fill`
 7. Background: full-coverage `<rect>`. Decorations: `<rect>`/`<circle>`/`<line>`/`<path>`
@@ -178,7 +179,13 @@ Use `<use data-icon="...">` placeholder syntax during SVG generation:
 
 ⚠️ `<use data-icon="...">` is a **temporary placeholder only**. The embed script below replaces them with native `<g>+<path>` elements. The final SVG passed to svg_to_pptx must NOT contain any `<use>` tags.
 
-After all SVGs are generated, run the embed script:
+After all SVGs are generated, run the full post-processing pipeline (icon embedding, image embedding, text flattening, etc.):
+
+```bash
+python3 {SKILL_DIR}/ppt-master-assets/scripts/finalize_svg.py ppt_svgs/
+```
+
+This replaces all `<use data-icon="...">` placeholders with native paths and applies other necessary SVG fixes for PPT compatibility. If `finalize_svg.py` is not available, you can run the icon embed step alone:
 
 ```bash
 python3 {SKILL_DIR}/ppt-master-assets/scripts/svg_finalize/embed_icons.py ppt_svgs/*.svg
@@ -194,7 +201,7 @@ python3 {SKILL_DIR}/ppt-master-assets/scripts/svg_finalize/embed_icons.py ppt_sv
 
 **Available chart types:** bar, stacked-bar, line, area, pie, donut, funnel, waterfall, gantt, radar, scatter, heatmap, treemap, SWOT, comparison, timeline, process-flow, org-chart, and more.
 
-**How to use:** Browse the chart SVGs as visual references, then build your chart using native SVG elements (`<rect>`, `<line>`, `<text>`, `<circle>`, `<path>`) following the same patterns. Do NOT embed chart SVGs directly — recreate them with your actual data.
+**How to use:** When a slide needs a chart, first `read` the matching chart SVG template (e.g., `bar.svg` for bar charts) to learn its layout structure and style patterns. Then recreate the chart using native SVG elements (`<rect>`, `<line>`, `<text>`, `<circle>`, `<path>`) with your actual data. Do NOT embed chart SVGs directly — they are references only.
 
 ### Phase 3: SVG → PPTX Conversion
 
