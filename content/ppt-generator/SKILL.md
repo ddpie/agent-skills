@@ -50,11 +50,15 @@ Propose a structure based on the topic and style:
 
 > Based on your needs, here's a suggested structure ({N} pages):
 >
-> 📄 P1 — Cover: {title}
-> 📄 P2 — Table of Contents
-> 📄 P3 — {Section 1 title}
+> P1 — Cover: {title}
+>
+> P2 — Table of Contents
+>
+> P3 — {Section 1 title}
+>
 > ...
-> 📄 P{N} — Closing: {key takeaway / CTA}
+>
+> P{N} — Closing: {key takeaway / CTA}
 >
 > Want to adjust anything, or shall I start generating?
 
