@@ -47,25 +47,25 @@ If the user already provided a detailed outline, skip to Step 2.
 >
 > **Tech / AI:**
 >
-> 1. **dark_warm** (default) — dark warm tone, AI/tech presentations
+> 1. **dark_warm** (default) — dark cover + light content, warm tone, AI/tech keynotes
 >
-> 2. **ai_ops** — full dark, DevOps/operations dashboards
+> 2. **ai_ops** — light theme, white bg + red-blue accents, operations dashboards
 >
-> 3. **cloud_orange** — deep navy + orange, cloud/tech architecture
+> 3. **cloud_orange** — full dark, deep navy + orange, cloud/tech architecture
 >
 > **Business / Formal:**
 >
-> 4. **consultant** — white + blue, strategy & consulting reports
+> 4. **consultant** — light theme, white + blue, strategy & consulting reports
 >
-> 5. **tech_blue** — blue tech, formal business presentations
+> 5. **tech_blue** — dark cover + light content, blue tech, formal business
 >
-> 6. **smart_red** — red accent, general business
+> 6. **smart_red** — dark cover + light content, red accent, general business
 >
 > **Creative / Data:**
 >
-> 7. **exhibit** — light showcase, data-heavy reports & analytics
+> 7. **exhibit** — dark theme, gradient + gold highlights, data showcases
 >
-> 8. **pixel_retro** — pixel retro, creative/fun topics
+> 8. **pixel_retro** — full dark, neon accents, creative/fun topics
 
 ### Step 3: Confirm Outline
 
@@ -271,13 +271,13 @@ Only send the final version. Do not send intermediate versions unless the user a
 | # | Style | Directory | Background |
 |---|-------|-----------|------------|
 | 1 | Dark Warm | dark_warm | Dark cover + light content |
-| 2 | AI Ops | ai_ops | Dark |
-| 3 | Cloud Orange | cloud_orange | Deep navy + orange |
-| 4 | Consultant | consultant | White + blue |
-| 5 | Tech Blue | tech_blue | Blue |
-| 6 | Smart Red | smart_red | Red |
-| 7 | Exhibit | exhibit | Light |
-| 8 | Pixel Retro | pixel_retro | Dark |
+| 2 | AI Ops | ai_ops | Light (white bg + red-blue) |
+| 3 | Cloud Orange | cloud_orange | Full dark (navy + orange) |
+| 4 | Consultant | consultant | Light (white + blue) |
+| 5 | Tech Blue | tech_blue | Dark cover + light content |
+| 6 | Smart Red | smart_red | Dark cover + light content |
+| 7 | Exhibit | exhibit | Dark (gradient + gold) |
+| 8 | Pixel Retro | pixel_retro | Full dark (neon) |
 
 Default recommendation: dark_warm.
 
