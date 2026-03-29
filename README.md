@@ -18,7 +18,7 @@ MIT
 
 ## 技能列表
 
-- [ppt-generator](content/ppt-generator/) — 专业 PPT 生成器，9 种主题、8 套布局、30+ 图表、600+ 图标
+- [ppt-generator](content/ppt-generator/) — 专业 PPT 生成器，8 套主题布局、30+ 图表、640+ 图标
 
 ## 许可
 
