@@ -28,14 +28,21 @@ If the user already provided a detailed outline, skip to Step 2.
 
 > Pick a style (just reply with the number):
 >
-> 1️⃣ **dark_warm** (default) — dark warm tone, AI/tech feel
-> 2️⃣ **consultant** — white + blue, consulting style
-> 3️⃣ **cloud_orange** — deep navy + orange, cloud/tech architecture
-> 4️⃣ **ai_ops** — full dark, ops/DevOps style
-> 5️⃣ **tech_blue** — blue tech, formal business
-> 6️⃣ **smart_red** — red business
-> 7️⃣ **exhibit** — light showcase, data-heavy
-> 8️⃣ **pixel_retro** — pixel retro, creative/fun
+> 1. **dark_warm** (default) — dark warm tone, AI/tech feel
+>
+> 2. **consultant** — white + blue, consulting style
+>
+> 3. **cloud_orange** — deep navy + orange, cloud/tech architecture
+>
+> 4. **ai_ops** — full dark, ops/DevOps style
+>
+> 5. **tech_blue** — blue tech, formal business
+>
+> 6. **smart_red** — red business
+>
+> 7. **exhibit** — light showcase, data-heavy
+>
+> 8. **pixel_retro** — pixel retro, creative/fun
 
 ### Step 3: Confirm Outline
 
