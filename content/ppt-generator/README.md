@@ -45,4 +45,4 @@ python3 ppt-master-assets/scripts/download_icons.py  # optional / 可选，图�
 
 ## License / 许可
 
-MIT (based on / 基于 [ppt-master](https://github.com/hugohe3/ppt-master))
+MIT
