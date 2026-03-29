@@ -117,7 +117,7 @@ ppt-master-assets/templates/layouts/{style}/04_ending.svg     ← ending page re
 
 ### Phase 2: Generate SVG Files
 
-Use the `write` tool to create SVG files page by page in `/tmp/ppt_svgs/{style}/`.
+Use the `write` tool to create SVG files page by page in a temporary directory (e.g. `ppt_svgs/`).
 
 **SVG Rules:**
 1. `viewBox` must be `0 0 1280 720` (16:9)
@@ -156,7 +156,7 @@ Use placeholder syntax during generation:
 After all SVGs are generated, run the embed script to replace placeholders with actual icon paths:
 
 ```bash
-python3 ppt-master-assets/scripts/embed_icons.py /tmp/ppt_svgs/{style}/*.svg
+python3 ppt-master-assets/scripts/embed_icons.py ppt_svgs/*.svg
 ```
 
 **Icon index:** See `ppt-master-assets/templates/icons/FULL_INDEX.md` for the complete list, or `icons_index.json` for programmatic lookup.
@@ -174,13 +174,13 @@ The output PPTX is fully editable in PowerPoint, just like a manually created fi
 
 ```python
 import sys, os
-sys.path.insert(0, os.path.expanduser(
-    "~/.openclaw/workspace/skills/ppt-generator/ppt-master-assets/scripts"))
+# Add the skill's scripts directory to path (adjust based on your environment)
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "ppt-master-assets", "scripts"))
 from svg_to_pptx import create_pptx_with_native_svg
 from pathlib import Path
 
-svgs = sorted(Path("/tmp/ppt_svgs/{style}").glob("*.svg"))
-create_pptx_with_native_svg(svgs, Path("/tmp/output.pptx"),
+svgs = sorted(Path("ppt_svgs").glob("*.svg"))
+create_pptx_with_native_svg(svgs, Path("output.pptx"),
                             canvas_format="ppt169",
                             use_native_shapes=True,  # required! otherwise SVG is embedded as image
                             verbose=True)
