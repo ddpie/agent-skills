@@ -2,18 +2,16 @@
 
 AI agent skill for generating professional presentation slides.
 
-AI Agent 技能，用于生成专业演示文稿。
+## Features
 
-## Features / 功能
+- 9 color themes
+- 8 layout templates
+- 30+ chart types
+- 600+ icons
+- Fully editable PPTX output
+- Optional multi-round cross review
 
-- 9 color themes / 9 种配色主题
-- 8 layout templates / 8 套布局模板
-- 30+ chart types / 30+ 图表类型
-- 600+ icons / 600+ 图标
-- Fully editable PPTX output / 输出可编辑的 PPTX 文件
-- Optional multi-round cross review / 可选多轮交叉审查
-
-## Themes / 主题
+## Themes
 
 | Theme | Style |
 |-------|-------|
@@ -24,7 +22,7 @@ AI Agent 技能，用于生成专业演示文稿。
 | light_corporate | Light corporate |
 | cloud_orange | Deep navy + orange |
 
-## Layouts / 布局
+## Layouts
 
 | Layout | Best for |
 |--------|----------|
@@ -37,7 +35,7 @@ AI Agent 技能，用于生成专业演示文稿。
 | pixel_retro | Creative / fun topics |
 | tech_blue | Formal business |
 
-## Usage / 使用
+## Usage
 
 Tell your agent to make a PPT. It will guide you through:
 
@@ -46,8 +44,58 @@ Tell your agent to make a PPT. It will guide you through:
 3. Review outline
 4. Generate
 
-让你的 Agent 帮你做 PPT，它会引导你完成主题确认、风格选择、大纲确认和生成。
-
 ## License
+
+MIT
+
+---
+
+# ppt-generator
+
+AI Agent 技能，用于生成专业演示文稿。
+
+## 功能
+
+- 9 种配色主题
+- 8 套布局模板
+- 30+ 图表类型
+- 600+ 图标
+- 输出可编辑的 PPTX 文件
+- 可选多轮交叉审查
+
+## 主题
+
+| 主题 | 风格 |
+|------|------|
+| dark_tech | 深色科技（默认） |
+| dark_warm | 深色暖调 |
+| dark_blue / purple / red / green | 深色变体 |
+| consultant | 白底蓝色，咨询风 |
+| light_corporate | 浅色商务 |
+| cloud_orange | 深蓝+橙色 |
+
+## 布局
+
+| 布局 | 适用场景 |
+|------|----------|
+| dark_warm | AI / 科技演示 |
+| consultant | 战略分析、商业报告 |
+| cloud_orange | 云架构、技术方案 |
+| ai_ops | 运维 / DevOps |
+| exhibit | 数据展示 |
+| smart_red | 通用商务 |
+| pixel_retro | 创意趣味 |
+| tech_blue | 正式商务 |
+
+## 使用方式
+
+让你的 Agent 帮你做 PPT，它会引导你完成：
+
+1. 确认主题
+2. 选择风格
+3. 确认大纲
+4. 生成
+
+## 许可
 
 MIT
