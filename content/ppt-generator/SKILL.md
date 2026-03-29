@@ -122,6 +122,7 @@ Use the `write` tool to create SVG files page by page in `/tmp/ppt_svgs/{style}/
 7. Tables: manual `<rect>` + `<text>` layout (no HTML tables)
 8. Fill the page — avoid large empty areas
 9. Titles should state insights, not category labels
+10. Use icons to enhance visual communication (see Icons section below)
 
 **Suggested order:**
 - Cover and ending first (set the tone)
@@ -129,6 +130,31 @@ Use the `write` tool to create SVG files page by page in `/tmp/ppt_svgs/{style}/
 - Content pages last (data-heavy, one at a time)
 
 ### Phase 3: SVG → PPTX Conversion
+
+svg_to_pptx converts SVG elements into **native DrawingML shapes** (not images):
+
+### Icons
+
+640+ SVG icons are bundled in `ppt-master-assets/templates/icons/`. Use them to add visual clarity to slides.
+
+**How to use in SVG:**
+
+Use placeholder syntax during generation:
+
+```xml
+<use data-icon="rocket" x="100" y="200" width="48" height="48" fill="#FF9900"/>
+<use data-icon="chart-bar" x="200" y="200" width="48" height="48" fill="#0076A8"/>
+```
+
+After all SVGs are generated, run the embed script to replace placeholders with actual icon paths:
+
+```bash
+python3 ppt-master-assets/scripts/embed_icons.py /tmp/ppt_svgs/{style}/*.svg
+```
+
+**Icon index:** See `ppt-master-assets/templates/icons/FULL_INDEX.md` for the complete list, or `icons_index.json` for programmatic lookup.
+
+**Common icons:** `rocket`, `chart-bar`, `chart-line`, `chart-pie`, `lightbulb`, `target`, `shield`, `cog`, `users`, `globe`, `database`, `cloud`, `lock-closed`, `sparkles`, `flag`, `bolt`
 
 svg_to_pptx converts SVG elements into **native DrawingML shapes** (not images):
 - `<text>` → editable text boxes (double-click to edit)
