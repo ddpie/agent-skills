@@ -98,7 +98,15 @@ For long presentations (15+ pages), group by chapter and show chapter-level summ
 
 Only start after user confirms. Send a brief status message:
 
-> Starting generation, this may take a few minutes for longer presentations.
+> Starting generation, {N} pages, this may take a few minutes.
+
+During generation, **report progress to the user every 3-5 pages**:
+
+> Page 5 of 25 done...
+> Page 10 of 25 done...
+> Page 20 of 25 done, almost there...
+
+Keep it short. Do NOT mention SVG, technical details, or internal steps — the user only cares about page progress.
 
 Then execute the Technical Flow below.
 
