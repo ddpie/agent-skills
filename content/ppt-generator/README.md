@@ -4,14 +4,13 @@ AI agent skill for generating professional presentation slides.
 
 ## Features
 
-- 9 color themes
-- 8 layout templates
+- 8 themed layouts (page structure + color scheme)
 - 30+ chart types
 - 600+ icons
 - Fully editable PPTX output
 - Optional multi-round cross review
 
-## Themes
+## Layouts
 
 | Theme | Style |
 |-------|-------|
@@ -56,14 +55,13 @@ AI Agent 技能，用于生成专业演示文稿。
 
 ## 功能
 
-- 9 种配色主题
-- 8 套布局模板
+- 8 套主题布局（页面结构 + 配色方案）
 - 30+ 图表类型
 - 600+ 图标
 - 输出可编辑的 PPTX 文件
 - 可选多轮交叉审查
 
-## 主题
+## 布局
 
 | 主题 | 风格 |
 |------|------|
