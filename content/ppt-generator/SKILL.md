@@ -1,6 +1,6 @@
 ---
 name: ppt-generator
-description: SVG-based PPT generator with 9 themes, 8 layouts, 30+ charts, and 600+ icons
+description: SVG-based PPT generator with 8 layouts, 9 color themes, 30+ charts, and 640+ icons
 ---
 
 # PPT Generator Skill
@@ -12,8 +12,10 @@ Includes 8 layout templates covering dark, light, consulting, tech, and more.
 
 - Python ≥ 3.10
 - Required packages: `pip install python-pptx lxml`
-- Agent capabilities: file write + shell execution
+- Agent capabilities: file write + **shell execution** (pure editor agents like Cursor cannot run this skill directly — users must execute commands manually)
 - (Optional) Subagent support for parallel cross review
+
+On first run, check if dependencies are installed. If not, run `pip install python-pptx lxml`.
 
 ## When to Use
 
@@ -34,7 +36,7 @@ After receiving a PPT request, **do not generate immediately**. Guide the user s
 > - 20 min → ~18 pages
 > - 30 min → ~25 pages
 >
-> Not sure? I'll default to ~15 pages.
+> Not sure? I'll default to ~15 pages (about 12-15 min).
 
 If the user already provided a detailed outline, skip to Step 2.
 
@@ -42,25 +44,25 @@ If the user already provided a detailed outline, skip to Step 2.
 
 > Pick a style (just reply with the number):
 >
-> **Business / Formal:**
->
-> 1. **consultant** — white + blue, strategy & consulting reports
->
-> 2. **tech_blue** — blue tech, formal business presentations
->
-> 3. **smart_red** — red accent, general business
->
 > **Tech / AI:**
 >
-> 4. **dark_warm** (default) — dark warm tone, AI/tech feel
+> 1. **dark_warm** (default) — dark warm tone, AI/tech presentations
 >
-> 5. **ai_ops** — full dark, DevOps/operations
+> 2. **ai_ops** — full dark, DevOps/operations dashboards
 >
-> 6. **cloud_orange** — deep navy + orange, cloud/tech architecture
+> 3. **cloud_orange** — deep navy + orange, cloud/tech architecture
+>
+> **Business / Formal:**
+>
+> 4. **consultant** — white + blue, strategy & consulting reports
+>
+> 5. **tech_blue** — blue tech, formal business presentations
+>
+> 6. **smart_red** — red accent, general business
 >
 > **Creative / Data:**
 >
-> 7. **exhibit** — light showcase, data-heavy presentations
+> 7. **exhibit** — light showcase, data-heavy reports & analytics
 >
 > 8. **pixel_retro** — pixel retro, creative/fun topics
 
@@ -116,37 +118,45 @@ Send the final PPTX with a brief note:
 ⚠️ **Everything below is internal execution detail. NEVER expose SVG rules, code, or technical process to the user.**
 
 ```
-Read design_spec.md + reference SVGs → Write SVG files → Embed icons → svg_to_pptx → Deliver
+Locate skill dir → Read design_spec → Write SVGs → Embed icons → svg_to_pptx → Deliver
 ```
 
-All paths below are relative to the skill root directory (where this SKILL.md is located).
+### Locating the Skill Directory
+
+Before starting, determine the skill root directory (where this SKILL.md is located). All relative paths below are based on this root. The agent should resolve this based on its platform:
+- OpenClaw: typically `~/.openclaw/skills/ppt-generator/` or `~/.openclaw/workspace/skills/ppt-generator/`
+- Kiro: typically `~/.kiro/skills/ppt-generator/`
+- Other: check where the skill was installed
+
+Store this as `SKILL_DIR` for use in subsequent phases.
 
 ### Phase 1: Read Design Spec
 
 Load the target style's design spec and reference templates:
 
 ```
-ppt-master-assets/templates/layouts/{style}/design_spec.md   ← colors, fonts, layout rules
-ppt-master-assets/templates/layouts/{style}/01_cover.svg      ← cover reference
-ppt-master-assets/templates/layouts/{style}/02_chapter.svg    ← chapter page reference
-ppt-master-assets/templates/layouts/{style}/03_content.svg    ← content page reference
-ppt-master-assets/templates/layouts/{style}/04_ending.svg     ← ending page reference
+{SKILL_DIR}/ppt-master-assets/templates/layouts/{style}/design_spec.md
+{SKILL_DIR}/ppt-master-assets/templates/layouts/{style}/01_cover.svg
+{SKILL_DIR}/ppt-master-assets/templates/layouts/{style}/02_chapter.svg
+{SKILL_DIR}/ppt-master-assets/templates/layouts/{style}/03_content.svg
+{SKILL_DIR}/ppt-master-assets/templates/layouts/{style}/04_ending.svg
 ```
 
 ### Phase 2: Generate SVG Files
 
-Use the `write` tool to create SVG files page by page in a temporary directory (agent decides the path).
+Create SVG files page by page in a temporary directory (agent decides the path).
 
 **SVG Rules:**
 1. `viewBox` must be `0 0 1280 720` (16:9)
 2. Strictly follow design_spec.md for colors, fonts, and layout
-3. **Do not use**: foreignObject, clipPath, mask, `<style>`, class, `<symbol>`, textPath, `@font-face`, `<animate>`, `<script>`, marker, external CSS, `<iframe>`. Full list in `ppt-master-assets/references/shared-standards.md`
-4. File naming: `01_cover.svg`, `02_toc.svg`, `03_chapter1.svg`... in order
-5. All text uses `<text>` elements with `font-family`, `font-size`, `fill`
-6. Background: full-coverage `<rect>`. Decorations: `<rect>`/`<circle>`/`<line>`/`<path>`
-7. Tables: manual `<rect>` + `<text>` layout (no HTML tables)
-8. Fill the page — avoid large empty areas
-9. Titles should state insights, not category labels
+3. **Forbidden elements**: foreignObject, clipPath, mask, `<style>`, class, `<symbol>`, textPath, `@font-face`, `<animate>`, `<set>`, `<script>`, event attributes, marker, external CSS, `<iframe>`. Full list: `ppt-master-assets/references/shared-standards.md`
+4. **Color compatibility**: Do NOT use `rgba()` or `opacity` on `<g>`/`<image>`. Use pre-mixed solid hex colors instead (e.g., `#2A4040` not `rgba(0,80,80,0.5)`). This ensures PPT compatibility.
+5. File naming: `01_cover.svg`, `02_toc.svg`, `03_chapter1.svg`... in order
+6. All text uses `<text>` elements with `font-family`, `font-size`, `fill`
+7. Background: full-coverage `<rect>`. Decorations: `<rect>`/`<circle>`/`<line>`/`<path>`
+8. Tables: manual `<rect>` + `<text>` layout (no HTML tables)
+9. Fill the page — avoid large empty areas
+10. Titles should state insights, not category labels. Example: ❌ "Market Analysis" → ✅ "Domestic Market CAGR Reached 23% Over 3 Years"
 
 **Suggested order:**
 - Cover and ending first (set the tone)
@@ -171,12 +181,20 @@ Use `<use data-icon="...">` placeholder syntax during SVG generation:
 After all SVGs are generated, run the embed script:
 
 ```bash
-python3 ppt-master-assets/scripts/svg_finalize/embed_icons.py ppt_svgs/*.svg
+python3 {SKILL_DIR}/ppt-master-assets/scripts/svg_finalize/embed_icons.py ppt_svgs/*.svg
 ```
 
 **Icon index:** See `ppt-master-assets/templates/icons/FULL_INDEX.md` for the complete list, or `icons_index.json` for programmatic lookup.
 
 **Common icons:** `rocket`, `chart-bar`, `chart-line`, `chart-pie`, `lightbulb`, `target`, `shield`, `cog`, `users`, `globe`, `database`, `cloud`, `lock-closed`, `sparkles`, `flag`, `bolt`
+
+### Phase 2.6: Charts (optional)
+
+30+ chart SVG templates are available in `ppt-master-assets/templates/charts/`. Use them as reference when building data visualization slides.
+
+**Available chart types:** bar, stacked-bar, line, area, pie, donut, funnel, waterfall, gantt, radar, scatter, heatmap, treemap, SWOT, comparison, timeline, process-flow, org-chart, and more.
+
+**How to use:** Browse the chart SVGs as visual references, then build your chart using native SVG elements (`<rect>`, `<line>`, `<text>`, `<circle>`, `<path>`) following the same patterns. Do NOT embed chart SVGs directly — recreate them with your actual data.
 
 ### Phase 3: SVG → PPTX Conversion
 
@@ -190,11 +208,10 @@ svg_to_pptx converts SVG elements into **native DrawingML shapes** (not images):
 The output PPTX is fully editable in PowerPoint, just like a manually created file.
 
 ```python
-import sys, os
+import sys
 from pathlib import Path
 
-# Add the skill's scripts directory to path (adjust based on your environment)
-SKILL_DIR = Path("path/to/ppt-generator")  # adjust this
+SKILL_DIR = Path("...")  # resolve to actual skill root directory
 sys.path.insert(0, str(SKILL_DIR / "ppt-master-assets" / "scripts"))
 from svg_to_pptx import create_pptx_with_native_svg
 
@@ -239,9 +256,9 @@ Only send the final version. Do not send intermediate versions unless the user a
 | # | Style | Directory | Background |
 |---|-------|-----------|------------|
 | 1 | Dark Warm | dark_warm | Dark cover + light content |
-| 2 | Consultant | consultant | White + blue |
+| 2 | AI Ops | ai_ops | Dark |
 | 3 | Cloud Orange | cloud_orange | Deep navy + orange |
-| 4 | AI Ops | ai_ops | Dark |
+| 4 | Consultant | consultant | White + blue |
 | 5 | Tech Blue | tech_blue | Blue |
 | 6 | Smart Red | smart_red | Red |
 | 7 | Exhibit | exhibit | Light |
@@ -263,6 +280,6 @@ Each template in `ppt-master-assets/templates/layouts/{directory}/` contains:
 Key docs in `ppt-master-assets/references/`:
 - `strategist.md` — strategist role
 - `executor-consultant-top.md` — top-tier consulting executor
-- `shared-standards.md` — SVG technical constraints (full forbidden element list)
+- `shared-standards.md` — SVG technical constraints (full forbidden element list + compatibility rules)
 
 ---
