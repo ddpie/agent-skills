@@ -1,7 +1,7 @@
 ---
 name: ppt-generator
 version: "1.0.0"
-description: SVG-based PPT generator with 8 layouts, 9 color themes, 30+ charts, and 640+ icons
+description: SVG-based PPT generator with 8 themed layouts, 30+ charts, and 640+ icons
 ---
 
 # PPT Generator Skill
@@ -41,9 +41,11 @@ After receiving a PPT request, **do not generate immediately**. Guide the user s
 
 If the user already provided a detailed outline, skip to Step 2.
 
-### Step 2: Pick a Style
+### Step 2: Pick a Layout
 
-> Pick a style (just reply with the number):
+Each layout includes its own page structure and color scheme:
+
+> Pick a layout (just reply with the number):
 >
 > **Tech / AI:**
 >
