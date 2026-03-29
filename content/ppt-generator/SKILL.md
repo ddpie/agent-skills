@@ -54,19 +54,26 @@ If the user already provided a detailed outline, skip topic confirmation but sti
 
 ### Step 3: Confirm Outline
 
-Propose a structure based on the topic and style:
+Propose a structure based on the topic and style. Use markdown format with clear line breaks. Each page should include a brief content summary:
 
 > Based on your needs, here's a suggested structure ({N} pages):
 >
-> P1 — Cover: {title}
+> **P1 — Cover**
+> Title, subtitle, author/date
 >
-> P2 — Table of Contents
+> **P2 — Table of Contents**
+> Overview of all sections
 >
-> P3 — {Section 1 title}
+> **P3 — {Section 1 title}**
+> Key points: {brief summary of what this page covers}
+>
+> **P4 — {Section 2 title}**
+> Key points: {brief summary of what this page covers}
 >
 > ...
 >
-> P{N} — Closing: {key takeaway / CTA}
+> **P{N} — Closing**
+> Key takeaway, call to action, or contact info
 >
 > Want to adjust anything, or shall I start generating?
 
